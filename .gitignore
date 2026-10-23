@@ -1,0 +1,73 @@
+# ============================================================
+#  .gitignore  ——  RTOS/BL 下各 STM32 CAN 工程（Keil + CubeMX）
+# ============================================================
+#  说明：本仓库只提交"自己的源码 + 工程文件 + CubeMX 配置"。
+#        CubeMX 生成的库（Drivers/Middlewares）和编译产物不提交。
+#        克隆后如需编译，请先用 CubeMX 打开各工程的 .ioc 重新 Generate。
+#  （本文件与 RTOS/OS/.gitignore 保持一致，方便两个仓库统一管理）
+# ============================================================
+
+# ---------- 1. Keil MDK 编译产物（不进仓库）----------
+*/MDK-ARM/Ncar/
+*/MDK-ARM/DebugConfig/
+*/MDK-ARM/RTE/
+*/MDK-ARM/*.lst
+*/MDK-ARM/*.htm
+*/MDK-ARM/*.build_log.htm
+*/MDK-ARM/*.dep
+
+# Keil 的"个人界面配置"（每个人窗口布局不同，不必共享）
+*.uvguix.*
+*.uvguix
+
+# ---------- 2. CubeMX 生成的库（按选择忽略）----------
+# 克隆后用 CubeMX 重新 Generate 即可恢复
+*/Drivers/
+*/Middlewares/
+
+# ---------- 3. CubeMX 的缓存 ----------
+.mxproject
+
+# ---------- 4. 通用编译产物 / 临时文件 ----------
+*.o
+*.d
+*.crf
+*.lnp
+*.axf
+*.elf
+*.hex
+*.bin
+*.map
+*.bak
+*.tmp
+*.log
+*.swp
+*~
+
+# ---------- 5. 手动备份文件（避免误提交）----------
+*.bak.*
+*_backup.*
+# 备份整个工程目录时常见的命名（如 CAN-硬件测试01机 - 副本）
+*- 副本/
+*副本*/
+
+# ============================================================
+#  ★ 以下内容是"必须保留"的，故意不写进忽略规则 —— 别加进来了！
+#
+#    Ncar.ioc                       CubeMX 工程配置（源头）
+#    MDK-ARM/Ncar.uvprojx           Keil 工程文件（手动加的源文件都在这）
+#    MDK-ARM/Ncar.uvoptx            工程选项
+#    MDK-ARM/startup_stm32f407xx.s  启动文件（源码，不是产物）
+#    Core/  Hardware/  System/      你的源码
+#    Core/Inc/FreeRTOSConfig.h      FreeRTOS 配置（在 Core 里，不会丢）
+#
+#  ★ CAN 项目特有：注意 freertos.c / can.c 里的 USER CODE 区
+#    每次 GENERATE CODE 前先 commit，避免手写代码被覆盖后无法回滚。
+# ============================================================
+
+# ---------- IDE 配置（不进仓库）----------
+.idea/
+
+# ---------- Python 缓存 ----------
+__pycache__/
+*.pyc
